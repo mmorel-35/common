@@ -630,7 +630,7 @@ func (rt *authorizationCredentialsFileRoundTripper) RoundTrip(req *http.Request)
 	if len(req.Header.Get("Authorization")) == 0 {
 		b, err := os.ReadFile(rt.authCredentialsFile)
 		if err != nil {
-			return nil, fmt.Errorf("unable to read authorization credentials file %s: %s", rt.authCredentialsFile, err)
+			return nil, fmt.Errorf("unable to read authorization credentials file %s: %w", rt.authCredentialsFile, err)
 		}
 		authCredentials := strings.TrimSpace(string(b))
 
@@ -670,7 +670,7 @@ func (rt *basicAuthRoundTripper) RoundTrip(req *http.Request) (*http.Response, e
 	if rt.usernameFile != "" {
 		usernameBytes, err := os.ReadFile(rt.usernameFile)
 		if err != nil {
-			return nil, fmt.Errorf("unable to read basic auth username file %s: %s", rt.usernameFile, err)
+			return nil, fmt.Errorf("unable to read basic auth username file %s: %w", rt.usernameFile, err)
 		}
 		username = strings.TrimSpace(string(usernameBytes))
 	} else {
@@ -679,7 +679,7 @@ func (rt *basicAuthRoundTripper) RoundTrip(req *http.Request) (*http.Response, e
 	if rt.passwordFile != "" {
 		passwordBytes, err := os.ReadFile(rt.passwordFile)
 		if err != nil {
-			return nil, fmt.Errorf("unable to read basic auth password file %s: %s", rt.passwordFile, err)
+			return nil, fmt.Errorf("unable to read basic auth password file %s: %w", rt.passwordFile, err)
 		}
 		password = strings.TrimSpace(string(passwordBytes))
 	} else {
@@ -723,7 +723,7 @@ func (rt *oauth2RoundTripper) RoundTrip(req *http.Request) (*http.Response, erro
 	if rt.config.ClientSecretFile != "" {
 		data, err := os.ReadFile(rt.config.ClientSecretFile)
 		if err != nil {
-			return nil, fmt.Errorf("unable to read oauth2 client secret file %s: %s", rt.config.ClientSecretFile, err)
+			return nil, fmt.Errorf("unable to read oauth2 client secret file %s: %w", rt.config.ClientSecretFile, err)
 		}
 		secret = strings.TrimSpace(string(data))
 		rt.mtx.RLock()
