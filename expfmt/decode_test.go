@@ -84,7 +84,7 @@ mf2 4
 	for {
 		var smpls model.Vector
 		err := dec.Decode(&smpls)
-		if err == io.EOF {
+		if err != nil && errors.Is(err, io.EOF) {
 			break
 		}
 		if err != nil {
