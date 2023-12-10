@@ -977,7 +977,7 @@ func (c *TLSConfig) getClientCertificate(_ *tls.CertificateRequestInfo) (*tls.Ce
 	if c.CertFile != "" {
 		certData, err = os.ReadFile(c.CertFile)
 		if err != nil {
-			return nil, fmt.Errorf("unable to read specified client cert (%s): %s", c.CertFile, err)
+			return nil, fmt.Errorf("unable to read specified client cert (%s): %w", c.CertFile, err)
 		}
 	} else {
 		certData = []byte(c.Cert)
@@ -986,7 +986,7 @@ func (c *TLSConfig) getClientCertificate(_ *tls.CertificateRequestInfo) (*tls.Ce
 	if c.KeyFile != "" {
 		keyData, err = os.ReadFile(c.KeyFile)
 		if err != nil {
-			return nil, fmt.Errorf("unable to read specified client key (%s): %s", c.KeyFile, err)
+			return nil, fmt.Errorf("unable to read specified client key (%s): %w", c.KeyFile, err)
 		}
 	} else {
 		keyData = []byte(c.Key)
@@ -994,7 +994,7 @@ func (c *TLSConfig) getClientCertificate(_ *tls.CertificateRequestInfo) (*tls.Ce
 
 	cert, err := tls.X509KeyPair(certData, keyData)
 	if err != nil {
-		return nil, fmt.Errorf("unable to use specified client cert (%s) & key (%s): %s", c.CertFile, c.KeyFile, err)
+		return nil, fmt.Errorf("unable to use specified client cert (%s) & key (%s): %w", c.CertFile, c.KeyFile, err)
 	}
 
 	return &cert, nil
@@ -1004,7 +1004,7 @@ func (c *TLSConfig) getClientCertificate(_ *tls.CertificateRequestInfo) (*tls.Ce
 func readCAFile(f string) ([]byte, error) {
 	data, err := os.ReadFile(f)
 	if err != nil {
-		return nil, fmt.Errorf("unable to load specified CA cert %s: %s", f, err)
+		return nil, fmt.Errorf("unable to load specified CA cert %s: %w", f, err)
 	}
 	return data, nil
 }
