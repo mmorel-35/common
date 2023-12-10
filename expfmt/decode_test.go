@@ -15,6 +15,7 @@ package expfmt
 
 import (
 	"bufio"
+	"errors"
 	"io"
 	"net/http"
 	"reflect"
