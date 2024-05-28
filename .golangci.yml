@@ -1,5 +1,6 @@
 linters:
   enable:
+    - errcheck
     - errorlint
     - gofumpt
     - goimports
@@ -8,10 +9,6 @@ linters:
     - testifylint
 
 issues:
-  exclude-rules:
-    - path: _test.go
-      linters:
-        - errcheck
   max-issues-per-linter: 0
   max-same-issues: 0
 
