@@ -17,6 +17,9 @@ linters:
     - testifylint
     - unused
 linters-settings:
+  gocritic:
+    disabled-checks:
+      - ifElseChain
   goimports:
     local-prefixes: github.com/prometheus/common
   revive:
