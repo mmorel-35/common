@@ -5,6 +5,7 @@ linters:
   enable:
     - errcheck
     - errorlint
+    - gocritic
     - gofumpt
     - goimports
     - gosimple
